@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -187,111 +188,121 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             },
           ),
 
-          _header(l.settingsReminders),
-          SwitchListTile(
-            secondary: const Icon(Icons.fitness_center),
-            title: Text(l.reminderWorkout),
-            subtitle: Text(l.reminderWorkoutHint),
-            value: s.workoutReminderEnabled,
-            onChanged: (value) => _changeReminders((c) => c.copyWith(workoutReminderEnabled: value)),
-          ),
-          if (s.workoutReminderEnabled) ...[
-            _weekdayChips(s.workoutReminderDays.toSet(), (day) {
-              final days = s.workoutReminderDays.toSet();
-              if (!days.remove(day)) days.add(day);
-              _changeReminders((c) => c.copyWith(workoutReminderDays: days.toList()..sort()));
-            }),
+          if (kIsWeb) ...[
+            _header(l.settingsReminders),
             ListTile(
-              leading: const SizedBox(width: 24),
-              title: Text(l.reminderTime),
-              trailing: Text(formatMinutesOfDay(s.workoutReminderMinutes)),
-              onTap: () async {
-                final minutes = await _pickTime(s.workoutReminderMinutes);
-                if (minutes != null) {
-                  await _changeReminders((c) => c.copyWith(workoutReminderMinutes: minutes));
-                }
-              },
+              leading: const Icon(Icons.phone_android),
+              title: Text(l.webAndroidOnlyTitle),
+              subtitle: Text(l.webRemindersHint),
             ),
           ],
-          SwitchListTile(
-            secondary: const Icon(Icons.water_drop_outlined),
-            title: Text(l.reminderWater),
-            subtitle: Text(l.reminderWaterHint(
-              '${s.waterReminderIntervalHours}',
-              '${s.waterReminderStartHour}',
-              '${s.waterReminderEndHour}',
-            )),
-            value: s.waterReminderEnabled,
-            onChanged: (value) => _changeReminders((c) => c.copyWith(waterReminderEnabled: value)),
-          ),
-          if (s.waterReminderEnabled) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Wrap(
-                spacing: 6,
-                children: [
-                  for (final hours in const [1, 2, 3, 4])
-                    ChoiceChip(
-                      label: Text(l.reminderEveryHours('$hours')),
-                      selected: s.waterReminderIntervalHours == hours,
-                      onSelected: (_) =>
-                          _changeReminders((c) => c.copyWith(waterReminderIntervalHours: hours)),
-                    ),
-                ],
+          if (!kIsWeb) ...[
+            _header(l.settingsReminders),
+            SwitchListTile(
+              secondary: const Icon(Icons.fitness_center),
+              title: Text(l.reminderWorkout),
+              subtitle: Text(l.reminderWorkoutHint),
+              value: s.workoutReminderEnabled,
+              onChanged: (value) => _changeReminders((c) => c.copyWith(workoutReminderEnabled: value)),
+            ),
+            if (s.workoutReminderEnabled) ...[
+              _weekdayChips(s.workoutReminderDays.toSet(), (day) {
+                final days = s.workoutReminderDays.toSet();
+                if (!days.remove(day)) days.add(day);
+                _changeReminders((c) => c.copyWith(workoutReminderDays: days.toList()..sort()));
+              }),
+              ListTile(
+                leading: const SizedBox(width: 24),
+                title: Text(l.reminderTime),
+                trailing: Text(formatMinutesOfDay(s.workoutReminderMinutes)),
+                onTap: () async {
+                  final minutes = await _pickTime(s.workoutReminderMinutes);
+                  if (minutes != null) {
+                    await _changeReminders((c) => c.copyWith(workoutReminderMinutes: minutes));
+                  }
+                },
               ),
+            ],
+            SwitchListTile(
+              secondary: const Icon(Icons.water_drop_outlined),
+              title: Text(l.reminderWater),
+              subtitle: Text(l.reminderWaterHint(
+                '${s.waterReminderIntervalHours}',
+                '${s.waterReminderStartHour}',
+                '${s.waterReminderEndHour}',
+              )),
+              value: s.waterReminderEnabled,
+              onChanged: (value) => _changeReminders((c) => c.copyWith(waterReminderEnabled: value)),
             ),
-            ListTile(
-              leading: const SizedBox(width: 24),
-              title: Text(l.reminderStartHour),
-              trailing: Text(formatMinutesOfDay(s.waterReminderStartHour * 60)),
-              onTap: () async {
-                final minutes = await _pickTime(s.waterReminderStartHour * 60);
-                if (minutes == null) return;
-                final hour = minutes ~/ 60;
-                await _changeReminders((c) => c.copyWith(
-                      waterReminderStartHour: hour,
-                      waterReminderEndHour: c.waterReminderEndHour < hour ? hour : c.waterReminderEndHour,
-                    ));
-              },
+            if (s.waterReminderEnabled) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Wrap(
+                  spacing: 6,
+                  children: [
+                    for (final hours in const [1, 2, 3, 4])
+                      ChoiceChip(
+                        label: Text(l.reminderEveryHours('$hours')),
+                        selected: s.waterReminderIntervalHours == hours,
+                        onSelected: (_) =>
+                            _changeReminders((c) => c.copyWith(waterReminderIntervalHours: hours)),
+                      ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: const SizedBox(width: 24),
+                title: Text(l.reminderStartHour),
+                trailing: Text(formatMinutesOfDay(s.waterReminderStartHour * 60)),
+                onTap: () async {
+                  final minutes = await _pickTime(s.waterReminderStartHour * 60);
+                  if (minutes == null) return;
+                  final hour = minutes ~/ 60;
+                  await _changeReminders((c) => c.copyWith(
+                        waterReminderStartHour: hour,
+                        waterReminderEndHour: c.waterReminderEndHour < hour ? hour : c.waterReminderEndHour,
+                      ));
+                },
+              ),
+              ListTile(
+                leading: const SizedBox(width: 24),
+                title: Text(l.reminderEndHour),
+                trailing: Text(formatMinutesOfDay(s.waterReminderEndHour * 60)),
+                onTap: () async {
+                  final minutes = await _pickTime(s.waterReminderEndHour * 60);
+                  if (minutes == null) return;
+                  final hour = minutes ~/ 60;
+                  await _changeReminders((c) => c.copyWith(
+                        waterReminderEndHour: hour,
+                        waterReminderStartHour: c.waterReminderStartHour > hour ? hour : c.waterReminderStartHour,
+                      ));
+                },
+              ),
+            ],
+            SwitchListTile(
+              secondary: const Icon(Icons.straighten),
+              title: Text(l.reminderMeasurement),
+              subtitle: Text(l.reminderMeasurementHint),
+              value: s.measurementReminderEnabled,
+              onChanged: (value) =>
+                  _changeReminders((c) => c.copyWith(measurementReminderEnabled: value)),
             ),
-            ListTile(
-              leading: const SizedBox(width: 24),
-              title: Text(l.reminderEndHour),
-              trailing: Text(formatMinutesOfDay(s.waterReminderEndHour * 60)),
-              onTap: () async {
-                final minutes = await _pickTime(s.waterReminderEndHour * 60);
-                if (minutes == null) return;
-                final hour = minutes ~/ 60;
-                await _changeReminders((c) => c.copyWith(
-                      waterReminderEndHour: hour,
-                      waterReminderStartHour: c.waterReminderStartHour > hour ? hour : c.waterReminderStartHour,
-                    ));
-              },
-            ),
-          ],
-          SwitchListTile(
-            secondary: const Icon(Icons.straighten),
-            title: Text(l.reminderMeasurement),
-            subtitle: Text(l.reminderMeasurementHint),
-            value: s.measurementReminderEnabled,
-            onChanged: (value) =>
-                _changeReminders((c) => c.copyWith(measurementReminderEnabled: value)),
-          ),
-          if (s.measurementReminderEnabled) ...[
-            _weekdayChips({s.measurementReminderDay}, (day) {
-              _changeReminders((c) => c.copyWith(measurementReminderDay: day));
-            }),
-            ListTile(
-              leading: const SizedBox(width: 24),
-              title: Text(l.reminderTime),
-              trailing: Text(formatMinutesOfDay(s.measurementReminderMinutes)),
-              onTap: () async {
-                final minutes = await _pickTime(s.measurementReminderMinutes);
-                if (minutes != null) {
-                  await _changeReminders((c) => c.copyWith(measurementReminderMinutes: minutes));
-                }
-              },
-            ),
+            if (s.measurementReminderEnabled) ...[
+              _weekdayChips({s.measurementReminderDay}, (day) {
+                _changeReminders((c) => c.copyWith(measurementReminderDay: day));
+              }),
+              ListTile(
+                leading: const SizedBox(width: 24),
+                title: Text(l.reminderTime),
+                trailing: Text(formatMinutesOfDay(s.measurementReminderMinutes)),
+                onTap: () async {
+                  final minutes = await _pickTime(s.measurementReminderMinutes);
+                  if (minutes != null) {
+                    await _changeReminders((c) => c.copyWith(measurementReminderMinutes: minutes));
+                  }
+                },
+              ),
+            ],
           ],
 
           _header(l.settingsGoals),
@@ -343,21 +354,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             },
           ),
 
-          _header(l.settingsHealth),
-          SwitchListTile(
-            secondary: const Icon(Icons.monitor_heart_outlined),
-            title: Text(l.stepsSetting),
-            subtitle: Text(l.stepsSettingHint),
-            value: s.stepsEnabled,
-            onChanged: (value) async {
-              if (value) {
-                await enableSteps(context, ref);
-              } else {
-                await _change((c) => c.copyWith(stepsEnabled: false));
-                ref.invalidate(todayStepsProvider);
-              }
-            },
-          ),
+          if (!kIsWeb) ...[
+            _header(l.settingsHealth),
+            SwitchListTile(
+              secondary: const Icon(Icons.monitor_heart_outlined),
+              title: Text(l.stepsSetting),
+              subtitle: Text(l.stepsSettingHint),
+              value: s.stepsEnabled,
+              onChanged: (value) async {
+                if (value) {
+                  await enableSteps(context, ref);
+                } else {
+                  await _change((c) => c.copyWith(stepsEnabled: false));
+                  ref.invalidate(todayStepsProvider);
+                }
+              },
+            ),
+          ],
 
           _header(l.settingsMedia),
           Padding(
@@ -381,25 +394,32 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             value: s.mediaOnDemand,
             onChanged: (value) => _change((c) => c.copyWith(mediaOnDemand: value)),
           ),
-          FutureBuilder<int>(
-            future: _cacheSize,
-            builder: (context, snapshot) {
-              final mb = (snapshot.data ?? 0) / (1024 * 1024);
-              return ListTile(
-                leading: const Icon(Icons.cleaning_services_outlined),
-                title: Text(l.mediaClearCache),
-                subtitle: Text(l.mediaCacheSize(formatNumber(mb))),
-                onTap: () async {
-                  await ref.read(mediaCacheProvider).clear();
-                  if (!mounted) return;
-                  setState(() => _cacheSize = ref.read(mediaCacheProvider).sizeInBytes());
-                  showMessage(this.context, l.mediaCacheCleared);
-                },
-              );
-            },
-          ),
+          if (!kIsWeb)
+            FutureBuilder<int>(
+              future: _cacheSize,
+              builder: (context, snapshot) {
+                final mb = (snapshot.data ?? 0) / (1024 * 1024);
+                return ListTile(
+                  leading: const Icon(Icons.cleaning_services_outlined),
+                  title: Text(l.mediaClearCache),
+                  subtitle: Text(l.mediaCacheSize(formatNumber(mb))),
+                  onTap: () async {
+                    await ref.read(mediaCacheProvider).clear();
+                    if (!mounted) return;
+                    setState(() => _cacheSize = ref.read(mediaCacheProvider).sizeInBytes());
+                    showMessage(this.context, l.mediaCacheCleared);
+                  },
+                );
+              },
+            ),
 
           _header(l.settingsData),
+          if (kIsWeb)
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: Text(l.webStorageTitle),
+              subtitle: Text(l.webStorageNote),
+            ),
           ListTile(
             leading: const Icon(Icons.backup_outlined),
             title: Text(l.dataExportJson),

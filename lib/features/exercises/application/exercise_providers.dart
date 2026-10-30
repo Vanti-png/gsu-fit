@@ -1,11 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/exercises/data/sqlite_exercise_repository.dart';
+import 'package:gsu_fit/features/exercises/data/web_exercise_repository.dart';
 import 'package:gsu_fit/features/exercises/domain/exercise.dart';
 
 final exerciseRepositoryProvider = Provider<ExerciseRepository>(
-  (ref) => SqliteExerciseRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebExerciseRepository(ref.watch(jsonStoreProvider))
+      : SqliteExerciseRepository(ref.watch(appDatabaseProvider)),
 );
 
 /// Library contents (deleted custom exercises excluded).

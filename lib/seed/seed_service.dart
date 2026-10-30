@@ -1,30 +1,29 @@
-import 'package:gsu_fit/core/database/app_database.dart';
 import 'package:gsu_fit/core/l10n/l10n.dart';
-import 'package:gsu_fit/features/exercises/data/sqlite_exercise_repository.dart';
+import 'package:gsu_fit/features/exercises/domain/exercise.dart';
 import 'package:gsu_fit/features/profile/domain/user_profile.dart';
-import 'package:gsu_fit/features/programs/data/sqlite_program_repository.dart';
+import 'package:gsu_fit/features/programs/domain/program.dart';
 import 'package:gsu_fit/features/programs/domain/program_generator.dart';
 import 'package:gsu_fit/features/programs/presentation/program_labels.dart';
-import 'package:gsu_fit/features/settings/data/sqlite_settings_repository.dart';
+import 'package:gsu_fit/features/settings/domain/app_settings.dart';
 import 'package:gsu_fit/seed/seed_exercises.dart';
 
 /// Installs the exercise library and a sample program on first launch.
 /// Versioned so later releases can add more seed content without
-/// touching what the user already has.
+/// touching what the user already has. Works on any storage backend.
 class SeedService {
-  SeedService(this._database);
+  SeedService({required this.settings, required this.exercises, required this.programs});
 
-  final AppDatabase _database;
+  final SettingsRepository settings;
+  final ExerciseRepository exercises;
+  final ProgramRepository programs;
 
   static const int currentVersion = 1;
   static const String _versionKey = 'seed_version';
 
   Future<void> seedIfNeeded(AppLocalizations l) async {
-    final settings = SqliteSettingsRepository(_database);
     final version = int.tryParse(await settings.getValue(_versionKey) ?? '') ?? 0;
     if (version >= currentVersion) return;
 
-    final exercises = SqliteExerciseRepository(_database);
     for (final exercise in seedExercises) {
       if (await exercises.getById(exercise.id) == null) {
         await exercises.save(exercise);
@@ -45,7 +44,7 @@ class SeedService {
         daysPerWeek: 3,
       );
       final program = ProgramGenerator(labels: programLabels(l)).generate(sampleProfile);
-      await SqliteProgramRepository(_database).saveFull(
+      await programs.saveFull(
         program.copyWith(name: l.sampleProgramName, description: l.sampleProgramDescription),
       );
     }

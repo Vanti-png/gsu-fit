@@ -1,14 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/cardio/application/cardio_providers.dart';
 import 'package:gsu_fit/features/profile/application/profile_providers.dart';
 import 'package:gsu_fit/features/workout/data/sqlite_workout_repository.dart';
+import 'package:gsu_fit/features/workout/data/web_workout_repository.dart';
 import 'package:gsu_fit/features/workout/domain/workout.dart';
 import 'package:gsu_fit/features/workout/domain/workout_stats.dart';
 
 final workoutRepositoryProvider = Provider<WorkoutRepository>(
-  (ref) => SqliteWorkoutRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebWorkoutRepository(ref.watch(jsonStoreProvider))
+      : SqliteWorkoutRepository(ref.watch(appDatabaseProvider)),
 );
 
 /// Finished workouts, newest first.

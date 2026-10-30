@@ -1,4 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+
+import 'package:gsu_fit/core/platform/web_files_stub.dart'
+    if (dart.library.js_interop) 'package:gsu_fit/core/platform/web_files_web.dart';
 
 /// Dart side of the Kotlin code in android/app/src/main/kotlin/.
 ///
@@ -73,7 +77,8 @@ class PickedDocument {
 }
 
 /// Save/open through Android's system file picker (Storage Access
-/// Framework); no storage permission is needed.
+/// Framework); no storage permission is needed. On the web the browser's
+/// download and file chooser are used instead.
 class FileBridge {
   static const MethodChannel _channel = MethodChannel('gsu_fit/files');
 
@@ -83,6 +88,9 @@ class FileBridge {
     required String mimeType,
     required Uint8List bytes,
   }) async {
+    if (kIsWeb) {
+      return saveDocumentInBrowser(fileName: fileName, mimeType: mimeType, bytes: bytes);
+    }
     final uri = await _channel.invokeMethod<String>('saveDocument', {
       'name': fileName,
       'mimeType': mimeType,
@@ -93,6 +101,7 @@ class FileBridge {
 
   /// Returns null when the user cancelled the dialog.
   Future<PickedDocument?> openDocument() async {
+    if (kIsWeb) return openDocumentInBrowser();
     final result = await _channel.invokeMapMethod<String, Object?>('openDocument');
     if (result == null) return null;
     return PickedDocument(

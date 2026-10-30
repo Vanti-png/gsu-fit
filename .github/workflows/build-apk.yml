@@ -1,6 +1,8 @@
-# Builds the APK on GitHub's servers so nothing has to be installed locally.
-# The download is only the finished APK (one per CPU type, ~20 MB each).
-name: APK derle
+# Builds everything on GitHub's servers so nothing has to be installed
+# locally:
+#  - android: release APKs (one per CPU type, ~20 MB each) as artifacts
+#  - web: the browser version, published to GitHub Pages
+name: APK ve web derle
 
 on:
   push:
@@ -12,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  android:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -74,7 +76,47 @@ jobs:
       - name: Summary
         if: always()
         run: |
-          echo "### Sonuç" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Android" >> "$GITHUB_STEP_SUMMARY"
           echo "- flutter analyze: ${{ steps.analyze.outcome }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- flutter test: ${{ steps.tests.outcome }}" >> "$GITHUB_STEP_SUMMARY"
           ls -la build/app/outputs/flutter-apk/ >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Generate web project files
+        run: flutter create --org com.gsu --project-name gsu_fit --platforms web .
+
+      - name: Patch web files (name, language)
+        run: dart run tool/patch_android.dart
+
+      # Served from https://<user>.github.io/<repo>/, hence the base href.
+      - name: Build web
+        run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  # GitHub Pages on the free plan needs a public repository.
+  deploy-web:
+    needs: web
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

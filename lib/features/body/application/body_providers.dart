@@ -1,16 +1,20 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/body/data/sqlite_body_repository.dart';
+import 'package:gsu_fit/features/body/data/web_body_repository.dart';
 import 'package:gsu_fit/features/body/domain/body_measurement.dart';
 import 'package:gsu_fit/features/profile/application/profile_providers.dart';
 
 final bodyRepositoryProvider = Provider<BodyRepository>(
-  (ref) => SqliteBodyRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebBodyRepository(ref.watch(jsonStoreProvider))
+      : SqliteBodyRepository(ref.watch(appDatabaseProvider)),
 );
 
 /// Newest first.

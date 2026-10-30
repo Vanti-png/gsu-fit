@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -68,7 +69,8 @@ class HomeScreen extends ConsumerWidget {
             _TodayWorkoutCard(),
             _WeeklySummaryCard(),
             _QuickLogCard(),
-            StepsCard(),
+            // Health Connect exists only on Android.
+            if (!kIsWeb) StepsCard(),
           ],
         ),
       ),

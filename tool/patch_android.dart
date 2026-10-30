@@ -1,11 +1,13 @@
-// Adjusts the Gradle file that `flutter create` generates:
-//  - minSdk 26 (required by Health Connect)
-//  - release signing from android/key.properties when that file exists
+// Adjusts the files that `flutter create` generates:
+//  - Android: minSdk 26 (required by Health Connect) and release signing
+//    from android/key.properties when that file exists
+//  - Web: app name, language and description in index.html/manifest.json
 //
 // Usage (from the project root, after `flutter create`):
 //   dart run tool/patch_android.dart
 //
 // Running it again is safe; already applied changes are skipped.
+import 'dart:convert';
 import 'dart:io';
 
 const _imports = 'import java.io.FileInputStream\nimport java.util.Properties\n\n';
@@ -36,12 +38,18 @@ const _releaseSigning = 'signingConfig = if (keystorePropertiesFile.exists()) '
     'signingConfigs.getByName("release") else signingConfigs.getByName("debug")';
 
 void main() {
-  final file = File('android/app/build.gradle.kts');
-  if (!file.existsSync()) {
-    stderr.writeln('android/app/build.gradle.kts bulunamadı. Önce README\'deki '
+  final android = File('android/app/build.gradle.kts');
+  final web = Directory('web');
+  if (!android.existsSync() && !web.existsSync()) {
+    stderr.writeln('android/ veya web/ bulunamadı. Önce README\'deki '
         '"flutter create" komutunu çalıştırın.');
     exit(1);
   }
+  if (android.existsSync()) _patchAndroid(android);
+  if (web.existsSync()) _patchWeb();
+}
+
+void _patchAndroid(File file) {
   var text = file.readAsStringSync();
   final original = text;
 
@@ -80,6 +88,38 @@ void main() {
   }
   file.writeAsStringSync(text);
   stdout.writeln('android/app/build.gradle.kts güncellendi.');
+}
+
+void _patchWeb() {
+  final manifest = File('web/manifest.json');
+  if (manifest.existsSync()) {
+    final json = jsonDecode(manifest.readAsStringSync()) as Map<String, dynamic>;
+    json
+      ..['name'] = 'GSU Fit'
+      ..['short_name'] = 'GSU Fit'
+      ..['description'] = 'Çevrimdışı spor ve fitness takibi'
+      ..['lang'] = 'tr'
+      ..['theme_color'] = '#1B8A5A'
+      ..['background_color'] = '#FFFFFF';
+    manifest.writeAsStringSync(const JsonEncoder.withIndent('    ').convert(json));
+  }
+  final index = File('web/index.html');
+  if (index.existsSync()) {
+    final html = index
+        .readAsStringSync()
+        .replaceFirst('<html>', '<html lang="tr">')
+        .replaceAll(RegExp(r'<title>[^<]*</title>'), '<title>GSU Fit</title>')
+        .replaceAll(
+          RegExp(r'<meta name="apple-mobile-web-app-title" content="[^"]*">'),
+          '<meta name="apple-mobile-web-app-title" content="GSU Fit">',
+        )
+        .replaceAll(
+          RegExp(r'<meta name="description" content="[^"]*">'),
+          '<meta name="description" content="Çevrimdışı spor ve fitness takibi">',
+        );
+    index.writeAsStringSync(html);
+  }
+  stdout.writeln('✓ web: uygulama adı ve dil');
 }
 
 /// Index just after the closing brace of the block starting with [opener].

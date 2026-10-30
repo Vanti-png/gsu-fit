@@ -833,6 +833,11 @@
       }
     }
   },
+  "webAndroidOnlyTitle": "Yalnızca Android uygulamasında",
+  "webPhotosHint": "İlerleme fotoğrafları gizlilik için yalnızca telefonda, uygulamanın özel klasöründe saklanır. Bu özelliği APK sürümünde kullanabilirsin.",
+  "webRemindersHint": "Bildirimler ve Health Connect adım sayısı Android uygulamasında çalışır.",
+  "webStorageNote": "Web sürümünde verilerin yalnızca bu tarayıcıda saklanır. Tarayıcı verilerini temizlersen silinir; düzenli yedek al. Yedeği daha sonra Android uygulamasına aktarabilirsin.",
+  "webStorageTitle": "Veriler bu tarayıcıda",
   "weekdayFri": "Cum",
   "weekdayFriday": "Cuma",
   "weekdayMon": "Pzt",

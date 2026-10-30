@@ -1,13 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/nutrition/data/sqlite_nutrition_repository.dart';
+import 'package:gsu_fit/features/nutrition/data/web_nutrition_repository.dart';
 import 'package:gsu_fit/features/nutrition/domain/nutrition.dart';
 import 'package:gsu_fit/features/profile/application/profile_providers.dart';
 import 'package:gsu_fit/features/settings/application/settings_controller.dart';
 
 final nutritionRepositoryProvider = Provider<NutritionRepository>(
-  (ref) => SqliteNutritionRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebNutritionRepository(ref.watch(jsonStoreProvider))
+      : SqliteNutritionRepository(ref.watch(appDatabaseProvider)),
 );
 
 /// Keyed by dayKey().

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +12,7 @@ import 'package:gsu_fit/core/widgets/common.dart';
 import 'package:gsu_fit/features/body/application/body_providers.dart';
 import 'package:gsu_fit/features/cardio/application/cardio_providers.dart';
 import 'package:gsu_fit/features/data_transfer/data/data_transfer_service.dart';
+import 'package:gsu_fit/features/data_transfer/data/table_access.dart';
 import 'package:gsu_fit/features/exercises/application/exercise_providers.dart';
 import 'package:gsu_fit/features/nutrition/application/nutrition_providers.dart';
 import 'package:gsu_fit/features/profile/application/profile_providers.dart';
@@ -22,7 +24,11 @@ import 'package:gsu_fit/features/workout/application/workout_providers.dart';
 import 'package:gsu_fit/seed/seed_service.dart';
 
 final dataTransferServiceProvider = Provider<DataTransferService>(
-  (ref) => DataTransferService(ref.watch(appDatabaseProvider)),
+  (ref) => DataTransferService(
+    kIsWeb
+        ? JsonTableAccess(ref.watch(jsonStoreProvider))
+        : SqliteTableAccess(ref.watch(appDatabaseProvider)),
+  ),
 );
 
 /// Reloads every data provider after an import or a reset.
@@ -161,11 +167,17 @@ Future<void> wipeAllData(BuildContext context, WidgetRef ref) async {
       await ref.read(activeWorkoutProvider.notifier).discard();
     }
     await ref.read(dataTransferServiceProvider).wipe();
-    await ref.read(photoStorageProvider).removeAll();
-    await ref.read(mediaCacheProvider).clear();
-    await ref.read(reminderBridgeProvider).cancelAll();
+    if (!kIsWeb) {
+      await ref.read(photoStorageProvider).removeAll();
+      await ref.read(mediaCacheProvider).clear();
+      await ref.read(reminderBridgeProvider).cancelAll();
+    }
     await ref.read(settingsProvider.notifier).change((_) => const AppSettings());
-    await SeedService(ref.read(appDatabaseProvider)).seedIfNeeded(l);
+    await SeedService(
+      settings: ref.read(settingsRepositoryProvider),
+      exercises: ref.read(exerciseRepositoryProvider),
+      programs: ref.read(programRepositoryProvider),
+    ).seedIfNeeded(l);
     // Invalidate before popping: this ref belongs to the settings screen.
     invalidateAllData(ref);
     navigator.popUntil((route) => route.isFirst);

@@ -6,6 +6,32 @@
 /// including deletions. Primary keys are UUID strings for the same reason.
 library;
 
+/// Column names per table, read from the CREATE TABLE statements below so
+/// the web store (which has no SQL) validates imports against the same
+/// schema as SQLite.
+Map<String, List<String>> schemaColumns() {
+  final tables = <String, List<String>>{};
+  final create = RegExp(r'^CREATE TABLE (\w+)\s*\(([\s\S]*)\)$');
+  final addColumn = RegExp(r'^ALTER TABLE (\w+) ADD COLUMN (\w+)');
+  final versions = migrations.keys.toList()..sort();
+  for (final version in versions) {
+    for (final statement in migrations[version]!) {
+      final sql = statement.trim();
+      final table = create.firstMatch(sql);
+      if (table != null) {
+        tables[table.group(1)!] = [
+          for (final column in table.group(2)!.split(','))
+            if (column.trim().isNotEmpty) column.trim().split(RegExp(r'\s+')).first,
+        ];
+        continue;
+      }
+      final added = addColumn.firstMatch(sql);
+      if (added != null) tables[added.group(1)!]?.add(added.group(2)!);
+    }
+  }
+  return tables;
+}
+
 const String _syncColumns =
     'created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL, deleted_at INTEGER';
 

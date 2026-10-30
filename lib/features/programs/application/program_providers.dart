@@ -1,11 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/programs/data/sqlite_program_repository.dart';
+import 'package:gsu_fit/features/programs/data/web_program_repository.dart';
 import 'package:gsu_fit/features/programs/domain/program.dart';
 
 final programRepositoryProvider = Provider<ProgramRepository>(
-  (ref) => SqliteProgramRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebProgramRepository(ref.watch(jsonStoreProvider))
+      : SqliteProgramRepository(ref.watch(appDatabaseProvider)),
 );
 
 final programsProvider = FutureProvider<List<Program>>(

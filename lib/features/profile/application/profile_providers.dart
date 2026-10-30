@@ -1,11 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/profile/data/sqlite_profile_repository.dart';
+import 'package:gsu_fit/features/profile/data/web_profile_repository.dart';
 import 'package:gsu_fit/features/profile/domain/user_profile.dart';
 
 final profileRepositoryProvider = Provider<ProfileRepository>(
-  (ref) => SqliteProfileRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebProfileRepository(ref.watch(jsonStoreProvider))
+      : SqliteProfileRepository(ref.watch(appDatabaseProvider)),
 );
 
 /// Null until onboarding is finished.

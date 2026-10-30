@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -67,6 +68,15 @@ class PhotosTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
+    if (kIsWeb) {
+      // Photos stay in the phone app's private storage, which the browser
+      // build does not have.
+      return EmptyState(
+        icon: Icons.phone_android,
+        title: l.webAndroidOnlyTitle,
+        message: l.webPhotosHint,
+      );
+    }
     final photos = ref.watch(photosProvider);
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(

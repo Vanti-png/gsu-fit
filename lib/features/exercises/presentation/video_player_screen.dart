@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,6 +62,9 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
       final VideoPlayerController controller;
       if (source.startsWith('asset:')) {
         controller = VideoPlayerController.asset(source.substring(6));
+      } else if (kIsWeb) {
+        // The browser streams and caches the video itself.
+        controller = VideoPlayerController.networkUrl(Uri.parse(source));
       } else if (source.startsWith('http://') || source.startsWith('https://')) {
         _downloading = true;
         final file = await ref.read(mediaCacheProvider).get(
@@ -131,10 +135,11 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
             child: VideoPlayer(controller),
           ),
           VideoControls(controller: controller, onFullscreen: _fullscreen),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(l.videoCachedNote, style: Theme.of(context).textTheme.bodySmall),
-          ),
+          if (!kIsWeb)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(l.videoCachedNote, style: Theme.of(context).textTheme.bodySmall),
+            ),
         ],
       );
     }

@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-enum MediaFailure { offline, notFound, server, invalidUrl }
+enum MediaFailure { offline, notFound, server, invalidUrl, unsupported }
 
 class MediaException implements Exception {
   const MediaException(this.failure, [this.statusCode]);
@@ -24,9 +24,15 @@ class MediaException implements Exception {
 /// Android may clear the cache when storage runs low; the next view simply
 /// downloads it again.
 class MediaCache {
-  MediaCache(this._directory);
+  MediaCache(Directory directory) : _directory = directory;
 
-  final Directory _directory;
+  /// For the web build: the browser caches network images itself and there
+  /// is no file system, so nothing is stored here.
+  MediaCache.disabled() : _directory = null;
+
+  final Directory? _directory;
+
+  bool get isEnabled => _directory != null;
   final Map<String, Future<File>> _inFlight = {};
 
   static Future<MediaCache> create() async {
@@ -37,14 +43,16 @@ class MediaCache {
   }
 
   File _fileFor(String url) {
+    final directory = _directory!;
     final uriPath = Uri.tryParse(url)?.path ?? '';
     var extension = p.extension(uriPath).toLowerCase();
     if (extension.length > 5) extension = '';
-    return File(p.join(_directory.path, '${_hash(url)}$extension'));
+    return File(p.join(directory.path, '${_hash(url)}$extension'));
   }
 
   /// Returns the cached file, or null when it has not been downloaded yet.
   Future<File?> cached(String url) async {
+    if (!isEnabled) return null;
     final file = _fileFor(url);
     return await file.exists() ? file : null;
   }
@@ -63,6 +71,7 @@ class MediaCache {
   }
 
   Future<File> _download(String url, void Function(double?)? onProgress) async {
+    if (!isEnabled) throw const MediaException(MediaFailure.unsupported);
     final target = _fileFor(url);
     if (await target.exists()) return target;
 
@@ -115,18 +124,21 @@ class MediaCache {
 
   Future<int> sizeInBytes() async {
     var total = 0;
-    if (!await _directory.exists()) return 0;
-    await for (final entity in _directory.list()) {
+    final directory = _directory;
+    if (directory == null || !await directory.exists()) return 0;
+    await for (final entity in directory.list()) {
       if (entity is File) total += await entity.length();
     }
     return total;
   }
 
   Future<void> clear() async {
-    if (await _directory.exists()) {
-      await _directory.delete(recursive: true);
+    final directory = _directory;
+    if (directory == null) return;
+    if (await directory.exists()) {
+      await directory.delete(recursive: true);
     }
-    await _directory.create(recursive: true);
+    await directory.create(recursive: true);
   }
 
   /// Two independent 32-bit FNV-1a hashes give a 64-bit, filename-safe key.

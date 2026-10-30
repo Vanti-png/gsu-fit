@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:sqflite/sqflite.dart';
-
 import 'package:gsu_fit/core/database/app_database.dart';
+import 'package:gsu_fit/features/data_transfer/data/table_access.dart';
 import 'package:gsu_fit/features/data_transfer/domain/csv_codec.dart';
 
 class ImportReport {
@@ -26,10 +25,12 @@ class ImportFormatException implements Exception {
 ///
 /// Imports merge by primary key: a row with an existing id replaces it,
 /// new ids are added. Nothing is deleted, so importing twice is harmless.
+/// The same files work on Android and on the web, so a backup taken in the
+/// browser can be imported into the app later.
 class DataTransferService {
-  DataTransferService(this._database);
+  DataTransferService(this._access);
 
-  final AppDatabase _database;
+  final TableAccess _access;
 
   static const String appTag = 'gsu_fit';
   static const int formatVersion = 1;
@@ -49,14 +50,12 @@ class DataTransferService {
     'profile',
   ];
 
-  Database get _db => _database.db;
-
   Future<String> exportJson() async {
     final tables = <String, Object?>{};
     for (final table in AppDatabase.dataTables) {
       // Soft-deleted rows are included so a restore (or a future sync)
       // also knows what was removed.
-      tables[table] = await _db.query(table);
+      tables[table] = await _access.rows(table, includeDeleted: true);
     }
     return const JsonEncoder.withIndent('  ').convert({
       'app': appTag,
@@ -88,31 +87,29 @@ class DataTransferService {
 
     var imported = 0;
     var skipped = 0;
-    await _db.transaction((txn) async {
-      for (final table in AppDatabase.dataTables) {
-        final rows = tables[table];
-        if (rows is! List) continue;
-        final columns = (await _database.columnsOf(table, executor: txn)).toSet();
-        for (final raw in rows) {
-          if (raw is! Map) {
-            skipped++;
-            continue;
-          }
-          final row = _sanitize(Map<String, Object?>.from(raw), columns);
-          if (row == null || !await _insert(txn, table, row)) {
-            skipped++;
-          } else {
-            imported++;
-          }
+    for (final table in AppDatabase.dataTables) {
+      final rows = tables[table];
+      if (rows is! List) continue;
+      final columns = (await _access.columnsOf(table)).toSet();
+      final valid = <Map<String, Object?>>[];
+      for (final raw in rows) {
+        final row = raw is Map ? _sanitize(Map<String, Object?>.from(raw), columns) : null;
+        if (row == null) {
+          skipped++;
+        } else {
+          valid.add(row);
         }
       }
-    });
+      final stored = await _access.putRows(table, valid);
+      imported += stored;
+      skipped += valid.length - stored;
+    }
     return ImportReport(imported: imported, skipped: skipped);
   }
 
   Future<String> exportCsv(String table) async {
-    final columns = await _database.columnsOf(table);
-    final rows = await _db.query(table, where: 'deleted_at IS NULL');
+    final columns = await _access.columnsOf(table);
+    final rows = await _access.rows(table, includeDeleted: false);
     final values = [
       for (final row in rows) [for (final column in columns) _toCsv(column, row[column])],
     ];
@@ -125,26 +122,25 @@ class DataTransferService {
     if (!rows.first.containsKey('id')) {
       throw const ImportFormatException('missing_id');
     }
-    final columns = (await _database.columnsOf(table)).toSet();
-    var imported = 0;
+    final columns = (await _access.columnsOf(table)).toSet();
+    final valid = <Map<String, Object?>>[];
     var skipped = 0;
-    await _db.transaction((txn) async {
-      for (final raw in rows) {
-        final values = <String, Object?>{};
-        raw.forEach((column, value) {
-          // Empty cells are left out so column defaults apply.
-          if (value.isEmpty) return;
-          values[column] = _fromCsv(column, value);
-        });
-        final row = _sanitize(values, columns);
-        if (row == null || !await _insert(txn, table, row)) {
-          skipped++;
-        } else {
-          imported++;
-        }
+    for (final raw in rows) {
+      final values = <String, Object?>{};
+      raw.forEach((column, value) {
+        // Empty cells are left out so column defaults apply.
+        if (value.isEmpty) return;
+        values[column] = _fromCsv(column, value);
+      });
+      final row = _sanitize(values, columns);
+      if (row == null) {
+        skipped++;
+      } else {
+        valid.add(row);
       }
-    });
-    return ImportReport(imported: imported, skipped: skipped);
+    }
+    final stored = await _access.putRows(table, valid);
+    return ImportReport(imported: stored, skipped: skipped + valid.length - stored);
   }
 
   /// Guesses the table from a file name such as
@@ -173,7 +169,8 @@ class DataTransferService {
       final parsed = DateTime.tryParse(value);
       if (parsed != null) return parsed.millisecondsSinceEpoch;
     }
-    // SQLite's column affinity turns numeric text into numbers.
+    // Numbers stay text here: SQLite's column affinity converts them, and
+    // the models' readers accept numeric strings on the web.
     return value;
   }
 
@@ -190,21 +187,6 @@ class DataTransferService {
     return row;
   }
 
-  Future<bool> _insert(Transaction txn, String table, Map<String, Object?> row) async {
-    try {
-      await txn.insert(table, row, conflictAlgorithm: ConflictAlgorithm.replace);
-      return true;
-    } on DatabaseException {
-      return false;
-    }
-  }
-
   /// Removes every row of every table; used by "delete all data".
-  Future<void> wipe() async {
-    await _db.transaction((txn) async {
-      for (final table in AppDatabase.allTables) {
-        await txn.delete(table);
-      }
-    });
-  }
+  Future<void> wipe() => _access.wipe(AppDatabase.allTables);
 }

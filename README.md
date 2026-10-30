@@ -204,6 +204,16 @@ flutter test
 
 ## 4. APK üretme
 
+### Web sürümü
+
+Aynı kod tarayıcı için de derlenir. Her gönderimde GitHub Pages'e yayınlanır: **https://vanti-png.github.io/gsu-fit/**. Telefonda tarayıcı menüsünden "Ana ekrana ekle" ile uygulama gibi kullanılabilir.
+
+- **Veriler:** SQLite yerine tarayıcının kendi deposunda (localStorage) tutulur. `lib/core/web_store/json_store.dart` aynı tablo ve sütunları kullanır.
+- **Yedek:** Web'de alınan JSON yedeği APK'ya, APK'nın yedeği de web'e aktarılabilir.
+- **Tarayıcı verisini temizlemek** web'deki kayıtları siler. Düzenli yedek al.
+- **Görseller ve videolar:** doğrudan internetten yüklenir, önbelleği tarayıcı tutar.
+- **Yalnızca Android'de olanlar:** ilerleme fotoğrafları, bildirimler ve Health Connect adım sayısı. Web'de bu bölümler gizlenir ve açıklama gösterilir.
+
 ### Bulutta derleme (önerilen, kotalı internet için)
 
 Hiçbir şey kurmadan APK almak için:

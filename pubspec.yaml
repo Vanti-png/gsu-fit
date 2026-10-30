@@ -23,6 +23,8 @@ dependencies:
   video_player: ^2.9.2
   image_picker: ^1.1.2
   health: ^13.0.0
+  # Web build only: browser storage and file download/upload (pure Dart).
+  web: ^1.1.0
 
 dev_dependencies:
   flutter_test:

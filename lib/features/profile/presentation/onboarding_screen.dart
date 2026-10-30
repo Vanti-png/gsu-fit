@@ -114,7 +114,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   ],
                 ),
               ),
+            // The key keeps the same PageView when the header and footer
+            // appear after the welcome page; without it Flutter rebuilds
+            // the PageView, which jumps back to the first page.
             Expanded(
+              key: const ValueKey('onboarding-pages'),
               child: PageView(
                 controller: _pages,
                 physics: const NeverScrollableScrollPhysics(),

@@ -1,18 +1,22 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/l10n/l10n.dart';
 import 'package:gsu_fit/core/platform/native_bridge.dart';
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/features/settings/data/sqlite_settings_repository.dart';
+import 'package:gsu_fit/features/settings/data/web_settings_repository.dart';
 import 'package:gsu_fit/features/settings/domain/app_settings.dart';
 
 /// Loaded in main() so the first frame already has the right theme.
 final initialSettingsProvider = Provider<AppSettings>((ref) => const AppSettings());
 
 final settingsRepositoryProvider = Provider<SettingsRepository>(
-  (ref) => SqliteSettingsRepository(ref.watch(appDatabaseProvider)),
+  (ref) => kIsWeb
+      ? WebSettingsRepository(ref.watch(jsonStoreProvider))
+      : SqliteSettingsRepository(ref.watch(appDatabaseProvider)),
 );
 
 final settingsProvider =
