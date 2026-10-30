@@ -1,0 +1,904 @@
+{
+  "@@locale": "tr",
+  "aboutDisclaimer": "Önemli not",
+  "aboutDisclaimerHint": "Bu uygulama tıbbi tavsiye vermez. Yeni bir programa başlamadan önce, özellikle bir sağlık sorunun varsa bir uzmana danış.",
+  "aboutImages": "Egzersiz görselleri",
+  "aboutImagesHint": "Örnek egzersiz görselleri kamu malı (public domain) free-exercise-db projesinden alınır ve ilk görüntülemeden sonra cihazda önbelleğe alınır.",
+  "aboutPrivacy": "Tüm verilerin yalnızca bu cihazda saklanır. Hesap, reklam veya takip yoktur.",
+  "appTitle": "GSU Fit",
+  "caloriesProgress": "{eaten} / {goal} kcal",
+  "@caloriesProgress": {
+    "placeholders": {
+      "eaten": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "cardioAddTitle": "Kardiyo ekle",
+  "cardioCalories": "Kalori",
+  "cardioCaloriesHint": "Süre, mesafe ve kilona göre tahmin edilir; değiştirebilirsin.",
+  "cardioCycling": "Bisiklet",
+  "cardioDeleteMessage": "Bu kardiyo kaydı silinecek.",
+  "cardioDeleteTitle": "Kayıt silinsin mi?",
+  "cardioDistance": "Mesafe",
+  "cardioDuration": "Süre",
+  "cardioEditTitle": "Kardiyoyu düzenle",
+  "cardioElliptical": "Eliptik",
+  "cardioHiking": "Doğa yürüyüşü",
+  "cardioJumpRope": "İp atlama",
+  "cardioOther": "Diğer",
+  "cardioPace": "Tempo: {pace} dk/km",
+  "@cardioPace": {
+    "placeholders": {
+      "pace": {
+        "type": "String"
+      }
+    }
+  },
+  "cardioRecalculate": "Yeniden hesapla",
+  "cardioRowing": "Kürek",
+  "cardioRunning": "Koşu",
+  "cardioSwimming": "Yüzme",
+  "cardioWalking": "Yürüyüş",
+  "categoryBodyweight": "Vücut ağırlığı",
+  "categoryCardio": "Kardiyo",
+  "categoryMobility": "Mobilite",
+  "categoryStrength": "Kuvvet",
+  "chartBodyWeight": "Vücut ağırlığı",
+  "chartExercise": "Egzersiz",
+  "chartMeasurements": "Vücut ölçüleri",
+  "chartNoDataInRange": "Seçilen aralıkta veri yok.",
+  "chartNoMeasurements": "Bu ölçü için henüz kayıt yok. Ölçümler sekmesinden ekleyebilirsin.",
+  "chartNoWeight": "Henüz kilo kaydı yok.",
+  "chartNoWorkouts": "Henüz tamamlanmış antrenman yok.",
+  "chartStrength": "Kuvvet gelişimi",
+  "chartWeeklyVolume": "Haftalık antrenman hacmi",
+  "commonAdd": "Ekle",
+  "commonBack": "Geri",
+  "commonCancel": "Vazgeç",
+  "commonClear": "Temizle",
+  "commonContinue": "Devam",
+  "commonDate": "Tarih",
+  "commonDelete": "Sil",
+  "commonDone": "tamamlandı",
+  "commonEdit": "Düzenle",
+  "commonMoveDown": "Aşağı taşı",
+  "commonMoveUp": "Yukarı taşı",
+  "commonNextDay": "Sonraki gün",
+  "commonNotDone": "yapılmadı",
+  "commonNotes": "Notlar",
+  "commonOptional": "İsteğe bağlı",
+  "commonPreviousDay": "Önceki gün",
+  "commonRefresh": "Yenile",
+  "commonRemove": "Kaldır",
+  "commonRetry": "Tekrar dene",
+  "commonSave": "Kaydet",
+  "commonToday": "Bugün",
+  "commonUndo": "Geri al",
+  "dataCancelled": "İşlem iptal edildi.",
+  "dataExportCsv": "CSV olarak dışa aktar",
+  "dataExportCsvChoose": "Hangi veriler dışa aktarılsın?",
+  "dataExportCsvHint": "Bir tabloyu Excel veya Google E-Tablolar ile açılabilen dosyaya kaydet.",
+  "dataExportFailed": "Dışa aktarma başarısız oldu.",
+  "dataExportJson": "Yedek al (JSON)",
+  "dataExportJsonHint": "Tüm verilerini tek dosyaya kaydet. Fotoğraflar dahil değildir.",
+  "dataExported": "Dosya kaydedildi.",
+  "dataImport": "İçe aktar",
+  "dataImportCsvChoose": "Bu CSV dosyası hangi verilere ait?",
+  "dataImportFailed": "Dosya okunamadı.",
+  "dataImportHint": "JSON yedeği veya CSV dosyası seç. Mevcut kayıtlar silinmez, birleştirilir.",
+  "dataImportInvalid": "Bu dosya bir GSU Fit yedeği değil.",
+  "dataImportNewer": "Bu yedek uygulamanın daha yeni bir sürümüyle alınmış. Önce uygulamayı güncelle.",
+  "dataImported": "{imported} kayıt içe aktarıldı, {skipped} kayıt atlandı.",
+  "@dataImported": {
+    "placeholders": {
+      "imported": {
+        "type": "String"
+      },
+      "skipped": {
+        "type": "String"
+      }
+    }
+  },
+  "dataWipe": "Tüm verileri sil",
+  "dataWipeConfirm": "Hepsini sil",
+  "dataWipeFailed": "Veriler silinemedi.",
+  "dataWipeHint": "Profil, antrenmanlar, ölçümler ve fotoğraflar kalıcı olarak silinir.",
+  "dataWipeMessage": "Bu işlem geri alınamaz. İstersen önce yedek al. Devam edilsin mi?",
+  "dataWipeTitle": "Tüm veriler silinsin mi?",
+  "dayFullBodyA": "Tüm Vücut A",
+  "dayFullBodyB": "Tüm Vücut B",
+  "dayFullBodyC": "Tüm Vücut C",
+  "dayLegs": "Bacak",
+  "dayLowerA": "Alt Vücut A",
+  "dayLowerB": "Alt Vücut B",
+  "dayPull": "Çekiş (Pull)",
+  "dayPush": "İtiş (Push)",
+  "dayUpperA": "Üst Vücut A",
+  "dayUpperB": "Üst Vücut B",
+  "daysCount": "{count} gün",
+  "@daysCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "durationHoursMinutes": "{hours} sa {minutes} dk",
+  "@durationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "durationMinutes": "{minutes} dk",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "equipmentBand": "Direnç bandı",
+  "equipmentBarbell": "Halter (barbell)",
+  "equipmentBodyweight": "Vücut ağırlığı",
+  "equipmentCable": "Kablo",
+  "equipmentDumbbell": "Dambıl",
+  "equipmentKettlebell": "Kettlebell",
+  "equipmentMachine": "Makine",
+  "equipmentOther": "Diğer",
+  "errorLoadFailed": "Veriler yüklenemedi.",
+  "errorSaveFailed": "Kaydedilemedi. Lütfen tekrar dene.",
+  "errorStartupMessage": "Uygulama verileri açılamadı. Cihazda yeterli boş alan olduğundan emin ol ve uygulamayı yeniden başlat.",
+  "errorStartupTitle": "Uygulama başlatılamadı",
+  "exerciseAdd": "Egzersiz ekle",
+  "exerciseBestOneRm": "Tahmini 1TM",
+  "exerciseBestWeight": "En yüksek ağırlık",
+  "exerciseCategory": "Kategori",
+  "exerciseCount": "{count} egzersiz",
+  "@exerciseCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "exerciseCustom": "Özel",
+  "exerciseDeleteMessage": "“{name}” kütüphaneden kaldırılacak. Geçmiş antrenmanlardaki kayıtlar korunur.",
+  "@exerciseDeleteMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "exerciseDeleteTitle": "Egzersiz silinsin mi?",
+  "exerciseDeleted": "Silinmiş egzersiz",
+  "exerciseDetails": "Egzersiz detayı",
+  "exerciseEdit": "Egzersizi düzenle",
+  "exerciseEquipment": "Ekipman",
+  "exerciseForm": "Doğru form",
+  "exerciseHistory": "Geçmiş ve rekorlar",
+  "exerciseImageUrls": "Görsel bağlantıları",
+  "exerciseImageUrlsHint": "Her satıra bir görsel adresi yaz. Birden fazla kare kısa animasyon olarak gösterilir.",
+  "exerciseInstructions": "Adım adım açıklama",
+  "exerciseInstructionsHint": "Her satır bir adım olarak gösterilir.",
+  "exerciseMuscles": "Hedef kaslar",
+  "exerciseName": "Egzersiz adı",
+  "exerciseNoHistory": "Bu egzersizi henüz bir antrenmanda yapmadın.",
+  "exerciseOneRmTrend": "Tahmini 1TM gelişimi",
+  "exercisePick": "Egzersiz seç",
+  "exercisePrimary": "Ana kaslar",
+  "exerciseSecondary": "Yardımcı kaslar",
+  "exerciseSessions": "Antrenman",
+  "exerciseTimed": "Süreli egzersiz",
+  "exerciseTimedHint": "Tekrar yerine saniye kaydedilir (ör. plank).",
+  "filterAll": "Tümü",
+  "filterAllEquipment": "Tüm ekipmanlar",
+  "filterEquipment": "Ekipman",
+  "foodAddTitle": "Yiyecek ekle",
+  "foodCalories": "Kalori",
+  "foodCaloriesHint": "Boş bırakırsan makrolardan hesaplanır.",
+  "foodCarbs": "Karbonhidrat",
+  "foodDeleted": "“{name}” silindi.",
+  "@foodDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "foodEditTitle": "Yiyeceği düzenle",
+  "foodEmpty": "Henüz kayıt yok.",
+  "foodFat": "Yağ",
+  "foodName": "Yiyecek",
+  "foodNameHint": "ör. Yulaf ezmesi",
+  "foodProtein": "Protein",
+  "goalAuto": "Otomatik: {value}",
+  "@goalAuto": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "goalAutoHint": "0 veya boş bırakırsan profiline göre hesaplanır.",
+  "goalCalories": "Günlük kalori hedefi",
+  "goalEndurance": "Dayanıklılık",
+  "goalEnduranceHint": "Daha uzun süre, daha az yorularak çalış.",
+  "goalGeneralHealth": "Genel sağlık",
+  "goalGeneralHealthHint": "Formda kal, kendini daha iyi hisset.",
+  "goalMuscleGain": "Kas kazanımı",
+  "goalMuscleGainHint": "Kas kütleni ve kuvvetini artır.",
+  "goalSteps": "Günlük adım hedefi",
+  "goalWater": "Günlük su hedefi",
+  "goalWeightLoss": "Kilo verme",
+  "goalWeightLossHint": "Yağ yak, kas kütleni koru.",
+  "historyAdd": "Kayıt ekle",
+  "historyAddCardio": "Kardiyo kaydı",
+  "historyAddWorkout": "Geçmiş antrenman ekle",
+  "historyAddWorkoutHint": "Daha önce yaptığın bir antrenmanı tarih ve süreyle kaydet.",
+  "historyEmpty": "Henüz kayıt yok",
+  "historyEmptyHint": "Antrenman veya kardiyo tamamladığında burada görünür.",
+  "historyTitle": "Antrenman geçmişi",
+  "homeChooseProgram": "Program seç",
+  "homeDoneToday": "Bugün tamamlandı",
+  "homeEstimated": "yaklaşık {duration}",
+  "@homeEstimated": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "homeGreeting": "Merhaba, {name}",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeGreetingNoName": "Merhaba!",
+  "homeNoActiveProgram": "Aktif bir programın yok. Profiline göre bir program oluşturabilir veya serbest antrenman yapabilirsin.",
+  "homeQuickLog": "Hızlı kayıt",
+  "homeTodayWorkout": "Bugünün antrenmanı",
+  "homeVolumeChange": "Geçen haftaya göre hacim: {change}",
+  "@homeVolumeChange": {
+    "placeholders": {
+      "change": {
+        "type": "String"
+      }
+    }
+  },
+  "homeWeekTarget": "{done} / {target} antrenman günü",
+  "@homeWeekTarget": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "homeWeeklySummary": "Bu hafta",
+  "kcalValue": "{value} kcal",
+  "@kcalValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "levelAdvanced": "İleri",
+  "levelAdvancedHint": "2 yıldan uzun süredir düzenli antrenman yapıyorum.",
+  "levelBeginner": "Başlangıç",
+  "levelBeginnerHint": "Yeni başlıyorum veya 6 aydan az deneyimim var.",
+  "levelIntermediate": "Orta",
+  "levelIntermediateHint": "6 ay ile 2 yıl arası düzenli antrenman deneyimim var.",
+  "libraryNoResults": "Aramana uygun egzersiz bulunamadı.",
+  "librarySearchHint": "Egzersiz, kas veya ekipman ara",
+  "libraryTitle": "Egzersiz kütüphanesi",
+  "macroSummary": "P {protein} g · K {carbs} g · Y {fat} g",
+  "@macroSummary": {
+    "placeholders": {
+      "protein": {
+        "type": "String"
+      },
+      "carbs": {
+        "type": "String"
+      },
+      "fat": {
+        "type": "String"
+      }
+    }
+  },
+  "mealBreakfast": "Kahvaltı",
+  "mealDinner": "Akşam yemeği",
+  "mealLunch": "Öğle yemeği",
+  "mealSnack": "Ara öğün",
+  "measurementAddTitle": "Ölçüm ekle",
+  "measurementArm": "Kol",
+  "measurementBmi": "VKİ",
+  "measurementBodyFat": "Yağ oranı",
+  "measurementChest": "Göğüs",
+  "measurementDeleteMessage": "Bu ölçüm kaydı silinecek.",
+  "measurementDeleteTitle": "Ölçüm silinsin mi?",
+  "measurementEditTitle": "Ölçümü düzenle",
+  "measurementEmpty": "En az bir değer gir.",
+  "measurementHint": "Yalnızca ölçtüğün alanları doldurman yeterli.",
+  "measurementLeg": "Bacak",
+  "measurementWaist": "Bel",
+  "measurementWeight": "Kilo",
+  "measurementsEmpty": "Henüz ölçüm yok",
+  "measurementsEmptyHint": "Kilonu ve çevre ölçülerini düzenli kaydet, değişimi grafiklerde izle.",
+  "mediaCacheCleared": "Önbellek temizlendi.",
+  "mediaCacheSize": "Kullanılan alan: {size} MB",
+  "@mediaCacheSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mediaClearCache": "Görsel ve video önbelleğini temizle",
+  "mediaIllustration": "Egzersiz görseli",
+  "mediaInvalidUrl": "Bağlantı geçersiz. https:// ile başlayan bir adres kullan.",
+  "mediaLoad": "İndir",
+  "mediaLoadFailed": "Görsel yüklenemedi.",
+  "mediaNoImage": "Bu egzersiz için görsel yok.",
+  "mediaNotFound": "Dosya bulunamadı (404).",
+  "mediaOffline": "İnternet bağlantısı yok. Daha önce açılmış görseller çevrimdışı da görünür.",
+  "mediaOnDemand": "Medyayı dokununca indir",
+  "mediaOnDemandHint": "Görseller ve videolar otomatik indirilmez; mobil veriden tasarruf edersin.",
+  "mediaQualityHigh": "Yüksek",
+  "mediaQualityHint": "Düşük kalitede yalnızca ilk görsel karesi indirilir ve varsa küçük video kullanılır.",
+  "mediaQualityLow": "Düşük (veri tasarrufu)",
+  "mediaServerError": "Sunucu hatası. Daha sonra tekrar dene.",
+  "mediaTapToLoad": "Görseli indirmek için dokun.",
+  "metricBestWeight": "En yüksek ağırlık",
+  "metricOneRepMax": "Tahmini 1TM",
+  "metricVolume": "Hacim",
+  "muscleAbs": "Karın",
+  "muscleBack": "Sırt",
+  "muscleBiceps": "Biceps",
+  "muscleCalves": "Baldır",
+  "muscleChest": "Göğüs",
+  "muscleForearms": "Ön kol",
+  "muscleFullBody": "Tüm vücut",
+  "muscleGlutes": "Kalça",
+  "muscleHamstrings": "Arka bacak",
+  "muscleLowerBack": "Bel",
+  "muscleQuads": "Ön bacak",
+  "muscleShoulders": "Omuz",
+  "muscleTriceps": "Triceps",
+  "navHome": "Ana sayfa",
+  "navLibrary": "Egzersizler",
+  "navNutrition": "Beslenme",
+  "navPrograms": "Programlar",
+  "navProgress": "İlerleme",
+  "nutritionCalories": "Kalori ve makrolar",
+  "nutritionTargetsNote": "Hedefler profiline göre tahmin edilir; Ayarlar'dan değiştirebilirsin. Tıbbi tavsiye değildir.",
+  "nutritionTitle": "Beslenme ve su",
+  "onboardingBodySubtitle": "Program ve kalori önerileri için kullanılır, cihazından çıkmaz.",
+  "onboardingBodyTitle": "Seni tanıyalım",
+  "onboardingCreateProgram": "Programımı oluştur",
+  "onboardingEditLater": "Programı ve profili istediğin zaman düzenleyebilirsin.",
+  "onboardingFeaturePrivacy": "Verilerin yalnızca cihazında saklanır",
+  "onboardingFeaturePrograms": "Sana özel haftalık antrenman programı",
+  "onboardingFeatureProgress": "Grafikler, ölçümler ve fotoğraflarla ilerleme takibi",
+  "onboardingGoalSubtitle": "Tekrar aralıkları ve dinlenme süreleri buna göre ayarlanır.",
+  "onboardingGoalTitle": "Hedefin ne?",
+  "onboardingLevelSubtitle": "Program bölünmesi deneyimine ve ayırabileceğin gün sayısına göre seçilir.",
+  "onboardingLevelTitle": "Deneyim ve zaman",
+  "onboardingRecommended": "Önerilen program",
+  "onboardingSkipProgram": "Şimdilik programsız devam et",
+  "onboardingStart": "Başlayalım",
+  "onboardingSummarySubtitle": "Bilgilerine göre senin için şu programı hazırladık.",
+  "onboardingSummaryTitle": "Hazırsın!",
+  "onboardingTagline": "Antrenmanını planla, kaydet, gelişimini gör.",
+  "photoAdd": "Fotoğraf ekle",
+  "photoAfter": "Sonra",
+  "photoBefore": "Önce",
+  "photoCamera": "Kamerayla çek",
+  "photoCompare": "Karşılaştır",
+  "photoDaysBetween": "Aradaki süre: {days} gün",
+  "@photoDaysBetween": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "photoDeleteMessage": "Fotoğraf cihazdan kalıcı olarak silinecek.",
+  "photoDeleteTitle": "Fotoğraf silinsin mi?",
+  "photoFailed": "Fotoğraf eklenemedi.",
+  "photoGallery": "Galeriden seç",
+  "photoPrivacy": "Fotoğraflar yalnızca uygulamanın özel klasöründe saklanır; galeride görünmez, yedeklere ve dışa aktarmaya dahil edilmez.",
+  "photosEmpty": "Henüz fotoğraf yok",
+  "photosEmptyHint": "Aynı ışıkta ve aynı pozda düzenli fotoğraf çekmek değişimi görmeyi kolaylaştırır.",
+  "profileAge": "Yaş",
+  "profileDaysPerWeek": "Haftada kaç gün antrenman yapabilirsin?",
+  "profileHeight": "Boy",
+  "profileName": "Adın",
+  "profileNameHint": "İsteğe bağlı",
+  "profileProgramNote": "Hedefini veya gün sayını değiştirdiysen Programlar sekmesinden yeni bir program oluşturabilirsin.",
+  "profileSaved": "Profil kaydedildi.",
+  "profileSex": "Cinsiyet",
+  "profileSexHint": "Yalnızca kalori hesabında kullanılır.",
+  "profileTitle": "Profil",
+  "profileWeight": "Kilo",
+  "programActivate": "Aktif program yap",
+  "programActivateMessage": "“{name}” ana sayfada bugünün antrenmanı olarak gösterilsin mi?",
+  "@programActivateMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "programActivateTitle": "Programı etkinleştir",
+  "programActive": "Aktif",
+  "programAddDay": "Gün ekle",
+  "programCardioTip": "Antrenmandan sonra 15–20 dakika orta tempolu kardiyo önerilir.",
+  "programCreate": "Oluştur",
+  "programDayDefault": "Gün {number}",
+  "@programDayDefault": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "programDayDeleteMessage": "“{name}” ve içindeki egzersizler programdan kaldırılacak.",
+  "@programDayDeleteMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "programDayDeleteTitle": "Gün silinsin mi?",
+  "programDayEmpty": "Bu günde egzersiz yok.",
+  "programDayEmptyHint": "Kütüphaneden egzersiz eklemek için alttaki düğmeye dokun.",
+  "programDayName": "Gün adı",
+  "programDayRename": "Günü yeniden adlandır",
+  "programDaysPerWeek": "Haftada {count} gün",
+  "@programDaysPerWeek": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "programDeleteMessage": "“{name}” silinecek. Tamamlanan antrenmanlar geçmişte kalır.",
+  "@programDeleteMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "programDeleteTitle": "Program silinsin mi?",
+  "programDescription": "{split} programı, hedef: {goal}. Ağırlıklar her antrenmanda performansına göre önerilir.",
+  "@programDescription": {
+    "placeholders": {
+      "split": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "programDescriptionLabel": "Açıklama",
+  "programDuration": "Program süresi",
+  "programEdit": "Programı düzenle",
+  "programEmpty": "Boş program",
+  "programEmptyHint": "Günleri ve egzersizleri kendin seç.",
+  "programFromProfile": "Profilime göre öner",
+  "programFromProfileHint": "Hedefine, seviyene ve gün sayına göre otomatik program.",
+  "programIncrement": "Ağırlık artışı",
+  "programIncrementHint": "Tüm setlerde üst tekrar sınırına ulaşınca eklenecek ağırlık.",
+  "programMaxReps": "En çok tekrar",
+  "programMinReps": "En az tekrar",
+  "programName": "Program adı",
+  "programNameCustom": "Özel program",
+  "programNameFullBody": "{days} Günlük Tüm Vücut",
+  "@programNameFullBody": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "programNameHybrid": "{days} Günlük PPL + Üst/Alt",
+  "@programNameHybrid": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "programNamePpl": "{days} Günlük İtiş/Çekiş/Bacak",
+  "@programNamePpl": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "programNameUpperLower": "{days} Günlük Üst/Alt",
+  "@programNameUpperLower": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "programNew": "Yeni program",
+  "programNext": "Sıradaki",
+  "programNoDays": "Bu programda henüz gün yok.",
+  "programNotFound": "Program bulunamadı.",
+  "programOverall": "Program geneli",
+  "programPrescription": "{sets} set × {reps} · {rest} sn dinlenme",
+  "@programPrescription": {
+    "placeholders": {
+      "sets": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "String"
+      },
+      "rest": {
+        "type": "String"
+      }
+    }
+  },
+  "programRestSeconds": "Dinlenme (sn)",
+  "programSets": "Set",
+  "programSetsReps": "{sets} × {reps}",
+  "@programSetsReps": {
+    "placeholders": {
+      "sets": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "programStartWeight": "Başlangıç ağırlığı",
+  "programStartWeightHint": "Boş bırakırsan ilk antrenmanda rahat yapabildiğin ağırlığı girersin.",
+  "programSwapExercise": "Egzersizi değiştir",
+  "programTemplateHint": "Hazır şablon; set ve tekrarlar profiline göre ayarlanır.",
+  "programThisWeek": "Bu hafta",
+  "programTotalProgress": "{done} / {total} antrenman · %{percent}",
+  "@programTotalProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "programWeekProgress": "Bu hafta {done} / {total} antrenman",
+  "@programWeekProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "programWeeks": "{weeks} hafta",
+  "@programWeeks": {
+    "placeholders": {
+      "weeks": {
+        "type": "String"
+      }
+    }
+  },
+  "programsEmpty": "Henüz program yok",
+  "programsEmptyHint": "Profiline göre otomatik program oluşturmak için Yeni program düğmesine dokun.",
+  "programsTitle": "Programlar",
+  "progressCharts": "Grafikler",
+  "progressMeasurements": "Ölçümler",
+  "progressPhotos": "Fotoğraflar",
+  "progressTitle": "İlerleme",
+  "quickCardio": "Kardiyo",
+  "quickFood": "Öğün",
+  "quickMeasurement": "Ölçüm",
+  "quickWater": "+250 ml su",
+  "rangeAll": "Tümü",
+  "rangeMonth": "1 ay",
+  "rangeQuarter": "3 ay",
+  "rangeYear": "1 yıl",
+  "reasonBeatBest": "önceki en iyini geç",
+  "reasonDeload": "üst üste iki kez hedefin altında kaldın, ağırlığı biraz azalt",
+  "reasonFirstSession": "ilk antrenman, rahat yapabildiğin bir ağırlıkla başla",
+  "reasonIncreaseReps": "aynı ağırlıkla bir tekrar daha",
+  "reasonIncreaseWeight": "tüm setlerde hedefe ulaştın, ağırlığı artır",
+  "reasonRepeat": "aynı ağırlıkla hedef tekrar aralığını tamamla",
+  "reminderEndHour": "Bitiş saati",
+  "reminderEveryHours": "{hours} saatte bir",
+  "@reminderEveryHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderMeasurement": "Ölçüm hatırlatıcısı",
+  "reminderMeasurementBody": "Kilonu ve ölçülerini kaydetme zamanı.",
+  "reminderMeasurementHint": "Haftada bir gün",
+  "reminderMeasurementTitle": "Haftalık ölçüm",
+  "reminderPermissionDenied": "Bildirim izni verilmedi. Hatırlatıcılar için Android ayarlarından izin verebilirsin.",
+  "reminderStartHour": "Başlangıç saati",
+  "reminderTime": "Saat",
+  "reminderWater": "Su hatırlatıcısı",
+  "reminderWaterBody": "Bir bardak su içmeye ne dersin?",
+  "reminderWaterHint": "{hours} saatte bir, {start}:00–{end}:00 arası",
+  "@reminderWaterHint": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderWaterTitle": "Su zamanı",
+  "reminderWorkout": "Antrenman hatırlatıcısı",
+  "reminderWorkoutBody": "Bugün antrenman günü. Hadi başlayalım!",
+  "reminderWorkoutHint": "Seçtiğin günlerde",
+  "reminderWorkoutTitle": "Antrenman zamanı",
+  "repsValue": "{reps} tekrar",
+  "@repsValue": {
+    "placeholders": {
+      "reps": {
+        "type": "String"
+      }
+    }
+  },
+  "restMinus15": "15 saniye azalt",
+  "restOverBody": "Dinlenme bitti, sıradaki sete geç.",
+  "restOverTitle": "Dinlenme bitti",
+  "restPlus15": "15 saniye ekle",
+  "restSkip": "Atla",
+  "restTitle": "Dinlenme",
+  "sampleProgramDescription": "Yeni başlayanlar için haftada 3 gün tüm vücut. Denemek için Aktif program yap düğmesine dokun.",
+  "sampleProgramName": "Örnek: Başlangıç Tüm Vücut",
+  "secondsValue": "{seconds} sn",
+  "@secondsValue": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAbout": "Hakkında",
+  "settingsAppearance": "Görünüm ve birimler",
+  "settingsData": "Veri yönetimi",
+  "settingsDefaultRest": "Varsayılan dinlenme süresi",
+  "settingsGoals": "Günlük hedefler",
+  "settingsHealth": "Sağlık verileri",
+  "settingsMedia": "Medya ve veri kullanımı",
+  "settingsReminders": "Bildirimler",
+  "settingsTitle": "Ayarlar",
+  "settingsWorkout": "Antrenman",
+  "sexFemale": "Kadın",
+  "sexMale": "Erkek",
+  "sexUnspecified": "Belirtmek istemiyorum",
+  "splitCustom": "Özel",
+  "splitFullBody": "Tüm Vücut",
+  "splitHybrid": "İtiş/Çekiş/Bacak + Üst/Alt",
+  "splitPushPullLegs": "İtiş/Çekiş/Bacak (PPL)",
+  "splitUpperLower": "Üst/Alt Vücut",
+  "statCalories": "Yakılan",
+  "statCardio": "Kardiyo",
+  "statDistance": "Mesafe",
+  "statSets": "Set",
+  "statTime": "Süre",
+  "statVolume": "Hacim",
+  "statWorkouts": "Antrenman",
+  "stepsConnect": "Health Connect'e bağlan",
+  "stepsError": "Adım verisi okunamadı.",
+  "stepsGoal": "Hedef: {goal} adım",
+  "@stepsGoal": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "stepsGrant": "İzin ver",
+  "stepsInstall": "Health Connect'i yükle",
+  "stepsIntro": "Günlük adım sayını görmek için Health Connect'e okuma izni ver. Yalnızca adım verisi okunur.",
+  "stepsNeedsPermission": "Adım verisini okumak için izin gerekiyor.",
+  "stepsNeedsUpdate": "Health Connect'in güncellenmesi gerekiyor.",
+  "stepsNotInstalled": "Bu cihazda Health Connect yüklü değil.",
+  "stepsPermissionDenied": "İzin verilmedi. Health Connect ayarlarından daha sonra izin verebilirsin.",
+  "stepsSetting": "Adım sayısı (Health Connect)",
+  "stepsSettingHint": "Bugünkü adımlarını ana sayfada göster.",
+  "stepsTitle": "Adımlar",
+  "stepsToday": "{steps} adım",
+  "@stepsToday": {
+    "placeholders": {
+      "steps": {
+        "type": "String"
+      }
+    }
+  },
+  "stepsUnavailable": "Health Connect bu cihazda kullanılamıyor.",
+  "stepsUnit": "adım",
+  "suggestionLabel": "Öneri",
+  "tableCardio": "Kardiyo kayıtları",
+  "tableExercises": "Egzersizler",
+  "tableFood": "Beslenme kayıtları",
+  "tableMeasurements": "Vücut ölçümleri",
+  "tableProfile": "Profil",
+  "tableProgramDays": "Program günleri",
+  "tableProgramExercises": "Program egzersizleri",
+  "tablePrograms": "Programlar",
+  "tableWater": "Su kayıtları",
+  "tableWorkoutSets": "Antrenman setleri",
+  "tableWorkouts": "Antrenmanlar",
+  "themeDark": "Koyu",
+  "themeLight": "Açık",
+  "themeSystem": "Sistem",
+  "unitKg": "kg",
+  "unitLb": "lb",
+  "unitMinutesShort": "dk",
+  "unitSecondsShort": "sn",
+  "unitWeeksShort": "hafta",
+  "validationAge": "13 ile 100 arasında bir yaş gir.",
+  "validationDuration": "Geçerli bir süre gir.",
+  "validationHeight": "100–250 cm arasında bir boy gir.",
+  "validationMuscle": "En az bir ana kas grubu seç.",
+  "validationNumber": "Geçerli bir sayı gir.",
+  "validationRequired": "Bu alan zorunlu.",
+  "validationWeight": "Geçerli bir kilo gir.",
+  "videoCachedNote": "Video bir kez indirildi ve cihazda saklanıyor; tekrar izlemek veri harcamaz.",
+  "videoDownloading": "Video indiriliyor…",
+  "videoEditHint": "MP4 gibi doğrudan oynatılabilen bir https bağlantısı gir. Düşük kalite bağlantısı isteğe bağlıdır.",
+  "videoEditTitle": "Video bağlantısı",
+  "videoExitFullscreen": "Tam ekrandan çık",
+  "videoFullscreen": "Tam ekran",
+  "videoLoading": "Video yükleniyor…",
+  "videoLoop": "Tekrar oynat (döngü)",
+  "videoPause": "Duraklat",
+  "videoPlay": "Oynat",
+  "videoPlayFailed": "Video oynatılamadı. Bağlantı desteklenmeyen bir biçimde olabilir.",
+  "videoReplay": "Baştan oynat",
+  "videoSpeed": "Oynatma hızı",
+  "videoUrlHigh": "Video bağlantısı (yüksek kalite)",
+  "videoUrlLow": "Video bağlantısı (düşük kalite)",
+  "videoWatch": "Videoyu izle",
+  "waterAdded": "{amount} ml su eklendi.",
+  "@waterAdded": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "waterAmount": "Miktar",
+  "waterCustom": "Diğer",
+  "waterCustomTitle": "Su ekle",
+  "waterProgress": "{drunk} / {goal} ml",
+  "@waterProgress": {
+    "placeholders": {
+      "drunk": {
+        "type": "String"
+      },
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "waterTitle": "Su",
+  "waterTotal": "{drunk} ml",
+  "@waterTotal": {
+    "placeholders": {
+      "drunk": {
+        "type": "String"
+      }
+    }
+  },
+  "waterUndoLast": "Son eklenen {amount} ml'yi geri al",
+  "@waterUndoLast": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "weekdayFri": "Cum",
+  "weekdayFriday": "Cuma",
+  "weekdayMon": "Pzt",
+  "weekdayMonday": "Pazartesi",
+  "weekdaySat": "Cmt",
+  "weekdaySaturday": "Cumartesi",
+  "weekdaySun": "Paz",
+  "weekdaySunday": "Pazar",
+  "weekdayThu": "Per",
+  "weekdayThursday": "Perşembe",
+  "weekdayTue": "Sal",
+  "weekdayTuesday": "Salı",
+  "weekdayWed": "Çar",
+  "weekdayWednesday": "Çarşamba",
+  "workoutAddExercise": "Egzersiz ekle",
+  "workoutAddSet": "Set ekle",
+  "workoutCongrats": "Harika iş! Antrenman kaydedildi.",
+  "workoutDeleteMessage": "Bu antrenman ve tüm setleri silinecek.",
+  "workoutDeleteTitle": "Antrenman silinsin mi?",
+  "workoutDiscard": "Antrenmanı iptal et",
+  "workoutDiscardAndStart": "İptal et, yenisini başlat",
+  "workoutDiscardMessage": "Bu antrenmanda girdiğin setler kaydedilmeyecek.",
+  "workoutDiscardTitle": "Antrenman iptal edilsin mi?",
+  "workoutDurationMinutes": "Süre",
+  "workoutEmpty": "Başlamak için egzersiz ekle.",
+  "workoutFinish": "Bitir",
+  "workoutFinishMessage": "{done} / {total} set tamamlandı. İşaretlenmeyen setler kaydedilmez.",
+  "@workoutFinishMessage": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutFinishTitle": "Antrenman bitirilsin mi?",
+  "workoutFreeName": "Serbest antrenman",
+  "workoutManualDate": "Antrenman tarihi ve saati",
+  "workoutManualName": "Geçmiş antrenman",
+  "workoutManualTitle": "Geçmiş antrenman",
+  "workoutNoSetsMessage": "Hiç set tamamlanmadı. Antrenman kaydedilmeden kapatılsın mı?",
+  "workoutNoSetsTitle": "Tamamlanan set yok",
+  "workoutNotFound": "Antrenman bulunamadı.",
+  "workoutNotes": "Notlar",
+  "workoutNotesHint": "Nasıl hissettin? Ağrı, form notları…",
+  "workoutOngoing": "Devam eden antrenman",
+  "workoutOpenMessage": "“{name}” henüz bitmedi. Devam etmek mi, iptal edip yenisini başlatmak mı istersin?",
+  "@workoutOpenMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "workoutOpenTitle": "Yarım kalan antrenman",
+  "workoutPrevious": "Önceki",
+  "workoutRemoveExercise": "Egzersizi çıkar",
+  "workoutRemoveExerciseMessage": "Bu egzersizin setleri antrenmandan çıkarılacak.",
+  "workoutRemoveExerciseTitle": "Egzersiz çıkarılsın mı?",
+  "workoutReps": "Tekrar",
+  "workoutResume": "Devam et",
+  "workoutSetDone": "Seti tamamla",
+  "workoutSetUndo": "Tamamlanmadı olarak işaretle",
+  "workoutStart": "Antrenmanı başlat",
+  "workoutStartFree": "Serbest antrenman başlat",
+  "workoutSummary": "Antrenman özeti"
+}

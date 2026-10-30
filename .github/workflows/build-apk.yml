@@ -1,0 +1,80 @@
+# Builds the APK on GitHub's servers so nothing has to be installed locally.
+# The download is only the finished APK (one per CPU type, ~20 MB each).
+name: APK derle
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      # The generated Android project is not committed. `flutter create`
+      # only adds missing files; AndroidManifest.xml and the Kotlin sources
+      # in the repo are kept.
+      - name: Generate Android project files
+        run: flutter create --org com.gsu --project-name gsu_fit --platforms android .
+
+      - name: Patch Gradle (minSdk 26, release signing)
+        run: dart run tool/patch_android.dart
+
+      - name: Get packages
+        run: flutter pub get
+
+      - name: Analyze
+        id: analyze
+        continue-on-error: true
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+      - name: Unit tests
+        id: tests
+        continue-on-error: true
+        run: flutter test
+
+      # Without android/key.properties the release build is signed with the
+      # debug key: fine for installing on your own phone, not for a store.
+      - name: Build release APKs (one per CPU type)
+        run: flutter build apk --release --split-per-abi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gsu-fit-arm64-v8a
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          if-no-files-found: error
+          compression-level: 0
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gsu-fit-armeabi-v7a
+          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          compression-level: 0
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Sonuç" >> "$GITHUB_STEP_SUMMARY"
+          echo "- flutter analyze: ${{ steps.analyze.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- flutter test: ${{ steps.tests.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          ls -la build/app/outputs/flutter-apk/ >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true

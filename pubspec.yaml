@@ -1,0 +1,35 @@
+name: gsu_fit
+description: "Çevrimdışı çalışan spor ve fitness takip uygulaması."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.0
+
+# Kept deliberately small: every package is a download at build time.
+# Notifications and file save/open use the app's own Kotlin code instead of
+# plugins, and media caching and charts are written in plain Dart.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # The exact version is pinned by flutter_localizations.
+  intl: any
+  flutter_riverpod: ^2.6.1
+  sqflite: ^2.4.2
+  path: ^1.9.0
+  path_provider: ^2.1.5
+  video_player: ^2.9.2
+  image_picker: ^1.1.2
+  health: ^13.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  # Generates lib/l10n/app_localizations*.dart from lib/l10n/*.arb.
+  generate: true
