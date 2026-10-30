@@ -29,3 +29,6 @@ android/app/release/
 # OS
 .DS_Store
 Thumbs.db
+
+# Downloaded build outputs
+apk/

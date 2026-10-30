@@ -44,8 +44,11 @@ class WorkoutHistoryScreen extends ConsumerWidget {
       ),
     );
     if (!context.mounted) return;
-    if (choice == 'workout') await startFreeWorkout(context, ref, manual: true);
-    if (choice == 'cardio') await showCardioForm(context);
+    if (choice == 'workout') {
+      await startFreeWorkout(context, ref, manual: true);
+    } else if (choice == 'cardio') {
+      await showCardioForm(context);
+    }
   }
 
   @override

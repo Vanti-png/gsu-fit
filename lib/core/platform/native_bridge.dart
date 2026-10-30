@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/services.dart';
 
 /// Dart side of the Kotlin code in android/app/src/main/kotlin/.
