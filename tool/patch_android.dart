@@ -37,6 +37,25 @@ const _signingConfigs = '''
 const _releaseSigning = 'signingConfig = if (keystorePropertiesFile.exists()) '
     'signingConfigs.getByName("release") else signingConfigs.getByName("debug")';
 
+// Shown while the app's ~4 MB of JavaScript and WebAssembly download, so a
+// slow connection sees progress instead of a blank page. Flutter's view
+// covers it once running; `:has` hides it as well.
+const _webLoader = '''
+  <style>
+    #loading { position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      font-family: system-ui, sans-serif; background: #fff; color: #1b8a5a; }
+    #loading .spinner { width: 44px; height: 44px; border-radius: 50%;
+      border: 4px solid #cfe9dc; border-top-color: #1b8a5a; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-color-scheme: dark) { #loading { background: #111; color: #8fd4b0; } }
+    body:has(flutter-view) #loading { display: none; }
+  </style>
+  <div id="loading" role="status">
+    <div class="spinner"></div>
+    <div>GSU Fit yükleniyor…</div>
+  </div>''';
+
 void main() {
   final android = File('android/app/build.gradle.kts');
   final web = Directory('web');
@@ -117,9 +136,11 @@ void _patchWeb() {
           RegExp(r'<meta name="description" content="[^"]*">'),
           '<meta name="description" content="Çevrimdışı spor ve fitness takibi">',
         );
-    index.writeAsStringSync(html);
+    index.writeAsStringSync(
+      html.contains('id="loading"') ? html : html.replaceFirst('<body>', '<body>\n$_webLoader'),
+    );
   }
-  stdout.writeln('✓ web: uygulama adı ve dil');
+  stdout.writeln('✓ web: uygulama adı, dil ve yükleme ekranı');
 }
 
 /// Index just after the closing brace of the block starting with [opener].
