@@ -44,11 +44,13 @@ const _webLoader = '''
   <style>
     #loading { position: fixed; inset: 0; display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 16px;
-      font-family: system-ui, sans-serif; background: #fff; color: #1b8a5a; }
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      background: #f5f5f7; color: #6e6e73; font-size: 13px; }
     #loading .spinner { width: 44px; height: 44px; border-radius: 50%;
-      border: 4px solid #cfe9dc; border-top-color: #1b8a5a; animation: spin 1s linear infinite; }
+      border: 3px solid rgba(0,0,0,0.08); border-top-color: #007aff; animation: spin .9s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    @media (prefers-color-scheme: dark) { #loading { background: #111; color: #8fd4b0; } }
+    @media (prefers-color-scheme: dark) { #loading { background: #1c1c1e; color: #98989d; }
+      #loading .spinner { border-color: rgba(255,255,255,0.12); border-top-color: #0a84ff; } }
     body:has(flutter-view) #loading { display: none; }
   </style>
   <div id="loading" role="status">
@@ -118,8 +120,8 @@ void _patchWeb() {
       ..['short_name'] = 'GSU Fit'
       ..['description'] = 'Çevrimdışı spor ve fitness takibi'
       ..['lang'] = 'tr'
-      ..['theme_color'] = '#1B8A5A'
-      ..['background_color'] = '#FFFFFF';
+      ..['theme_color'] = '#F5F5F7'
+      ..['background_color'] = '#F5F5F7';
     manifest.writeAsStringSync(const JsonEncoder.withIndent('    ').convert(json));
   }
   final index = File('web/index.html');

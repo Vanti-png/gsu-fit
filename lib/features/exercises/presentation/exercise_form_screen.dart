@@ -127,7 +127,7 @@ class _ExerciseFormScreenState extends ConsumerState<ExerciseFormScreen> {
       appBar: AppBar(
         title: Text(widget.existing == null ? l.exerciseAdd : l.exerciseEdit),
       ),
-      body: Form(
+      body: ReadableWidth(child: Form(
         key: _form,
         child: ListView(
           padding: const EdgeInsets.all(16),
@@ -178,7 +178,7 @@ class _ExerciseFormScreenState extends ConsumerState<ExerciseFormScreen> {
             const SizedBox(height: 6),
             _muscleChips(_secondary),
             const SizedBox(height: 8),
-            SwitchListTile(
+            SwitchListTile.adaptive(
               contentPadding: EdgeInsets.zero,
               title: Text(l.exerciseTimed),
               subtitle: Text(l.exerciseTimedHint),
@@ -219,7 +219,7 @@ class _ExerciseFormScreenState extends ConsumerState<ExerciseFormScreen> {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

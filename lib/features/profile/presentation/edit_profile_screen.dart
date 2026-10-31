@@ -51,7 +51,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     final unit = ref.watch(settingsProvider.select((s) => s.weightUnit));
     return Scaffold(
       appBar: AppBar(title: Text(l.profileTitle)),
-      body: Form(
+      body: ReadableWidth(child: Form(
         key: _form,
         child: ListView(
           padding: const EdgeInsets.all(16),
@@ -76,7 +76,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
             FilledButton(onPressed: _save, child: Text(l.commonSave)),
           ],
         ),
-      ),
+      )),
     );
   }
 }

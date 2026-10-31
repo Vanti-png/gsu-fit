@@ -65,11 +65,11 @@ class SplashView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.fitness_center, size: 72, color: theme.colorScheme.primary),
+            const AppMark(size: 72),
             const SizedBox(height: 16),
             Text(context.l10n.appTitle, style: theme.textTheme.headlineMedium),
             const SizedBox(height: 24),
-            const CircularProgressIndicator(),
+            const CircularProgressIndicator.adaptive(),
           ],
         ),
       ),

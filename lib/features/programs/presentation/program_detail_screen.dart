@@ -168,7 +168,7 @@ class ProgramDetailScreen extends ConsumerWidget {
             icon: const Icon(Icons.add),
             label: Text(l.programAddDay),
           ),
-          body: ListView(
+          body: ReadableWidth(child: ListView(
             padding: const EdgeInsets.only(top: 8, bottom: 96),
             children: [
               SectionCard(
@@ -299,7 +299,7 @@ class ProgramDetailScreen extends ConsumerWidget {
                   ),
                 ),
             ],
-          ),
+          )),
         );
       },
       ),

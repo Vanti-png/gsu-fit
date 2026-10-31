@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gsu_fit/core/l10n/l10n.dart';
 import 'package:gsu_fit/core/l10n/labels.dart';
 import 'package:gsu_fit/core/providers.dart';
+import 'package:gsu_fit/core/theme/app_theme.dart';
 import 'package:gsu_fit/core/utils/formatters.dart';
 import 'package:gsu_fit/core/utils/units.dart';
 import 'package:gsu_fit/core/widgets/common.dart';
@@ -210,7 +211,7 @@ class _ChartsTabState extends ConsumerState<ChartsTab> {
                   points: fieldPoints,
                   formatValue: (v) => '${formatNumber(v)} $fieldSuffix',
                   formatDate: formatDateShort,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: context.palette.purple,
                 ),
             ],
           ),

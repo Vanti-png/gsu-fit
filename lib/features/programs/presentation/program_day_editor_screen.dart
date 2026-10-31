@@ -156,7 +156,7 @@ class ProgramDayEditorScreen extends ConsumerWidget {
         icon: const Icon(Icons.add),
         label: Text(l.workoutAddExercise),
       ),
-      body: items.isEmpty
+      body: ReadableWidth(child: items.isEmpty
           ? EmptyState(icon: Icons.playlist_add, title: l.programDayEmpty, message: l.programDayEmptyHint)
           : ListView.builder(
               padding: const EdgeInsets.only(top: 8, bottom: 96),
@@ -198,7 +198,7 @@ class ProgramDayEditorScreen extends ConsumerWidget {
                   ),
                 );
               },
-            ),
+            )),
     );
   }
 }

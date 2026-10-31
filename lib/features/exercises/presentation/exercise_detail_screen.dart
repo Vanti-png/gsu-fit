@@ -124,7 +124,7 @@ class ExerciseDetailScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: ListView(
+      body: ReadableWidth(child: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
           ExerciseMediaView(urls: exercise.imageUrls),
@@ -250,7 +250,7 @@ class ExerciseDetailScreen extends ConsumerWidget {
                   ),
           ),
         ],
-      ),
+      )),
     );
   }
 }

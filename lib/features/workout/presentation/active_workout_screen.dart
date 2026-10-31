@@ -240,7 +240,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
           ),
         ],
       ),
-      body: ListView(
+      body: ReadableWidth(child: ListView(
         padding: const EdgeInsets.only(top: 8, bottom: 32),
         children: [
           if (session.isManual)
@@ -308,7 +308,7 @@ class _ActiveWorkoutScreenState extends ConsumerState<ActiveWorkoutScreen> {
             ),
           ),
         ],
-      ),
+      )),
       bottomNavigationBar: restEndsAt == null
           ? null
           : RestTimerBar(

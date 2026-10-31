@@ -37,13 +37,21 @@ class HomeScreen extends ConsumerWidget {
     final name = ref.watch(profileProvider).dataOrNull?.name ?? '';
     return Scaffold(
       appBar: AppBar(
+        // Large left-aligned title, like the first screen of an Apple app.
+        centerTitle: false,
+        toolbarHeight: 68,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(name.isEmpty ? l.homeGreetingNoName : l.homeGreeting(name)),
             Text(
               formatDateWithWeekday(DateTime.now()),
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+            Text(
+              name.isEmpty ? l.homeGreetingNoName : l.homeGreeting(name),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),

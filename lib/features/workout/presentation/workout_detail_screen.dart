@@ -53,7 +53,7 @@ class WorkoutDetailScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: AsyncValueView(
+      body: ReadableWidth(child: AsyncValueView(
         value: workouts,
         onRetry: () => ref.invalidate(workoutsProvider),
         data: (list) {
@@ -121,7 +121,7 @@ class WorkoutDetailScreen extends ConsumerWidget {
             ],
           );
         },
-      ),
+      )),
     );
   }
 }

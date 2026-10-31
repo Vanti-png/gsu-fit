@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -90,17 +91,16 @@ class _ExerciseListState extends ConsumerState<ExerciseList> {
           child: TextField(
             controller: _search,
             onChanged: (_) => setState(() {}),
-            decoration: InputDecoration(
-              hintText: l.librarySearchHint,
-              prefixIcon: const Icon(Icons.search),
+            decoration: searchDecoration(
+              context,
+              l.librarySearchHint,
               suffixIcon: _search.text.isEmpty
                   ? null
                   : IconButton(
                       tooltip: l.commonClear,
-                      icon: const Icon(Icons.close),
+                      icon: const Icon(CupertinoIcons.xmark_circle_fill, size: 18),
                       onPressed: () => setState(_search.clear),
                     ),
-              border: const OutlineInputBorder(),
             ),
           ),
         ),

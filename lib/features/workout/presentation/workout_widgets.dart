@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gsu_fit/core/l10n/l10n.dart';
+import 'package:gsu_fit/core/theme/app_theme.dart';
 import 'package:gsu_fit/core/utils/dates.dart';
 import 'package:gsu_fit/core/utils/formatters.dart';
 import 'package:gsu_fit/core/utils/units.dart';
+import 'package:gsu_fit/core/widgets/common.dart';
 import 'package:gsu_fit/features/workout/domain/workout.dart';
 
 /// Live "mm:ss" since [since].
@@ -225,23 +227,17 @@ class _SetRowState extends State<SetRow> {
     ));
   }
 
-  InputDecoration _decoration(String label) => InputDecoration(
-        isDense: true,
-        labelText: label,
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-      );
+  InputDecoration _decoration(String label) => fieldDecoration(label, dense: true);
 
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    final scheme = Theme.of(context).colorScheme;
     final done = widget.set.completed;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
       decoration: BoxDecoration(
-        color: done ? scheme.primaryContainer.withValues(alpha: 0.6) : null,
+        color: done ? context.palette.greenTint : null,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -284,7 +280,7 @@ class _SetRowState extends State<SetRow> {
               widget.onToggle();
             },
             icon: const Icon(Icons.check_circle_outline),
-            selectedIcon: Icon(Icons.check_circle, color: scheme.primary),
+            selectedIcon: Icon(Icons.check_circle, color: context.palette.green),
           ),
         ],
       ),

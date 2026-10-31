@@ -239,11 +239,10 @@ class _CardioFormSheetState extends ConsumerState<CardioFormSheet> {
             TextFormField(
               controller: _calories,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: l.cardioCalories,
-                suffixText: 'kcal',
-                helperText: l.cardioCaloriesHint,
-                border: const OutlineInputBorder(),
+              decoration: fieldDecoration(
+                l.cardioCalories,
+                suffix: 'kcal',
+                helper: l.cardioCaloriesHint,
                 suffixIcon: IconButton(
                   tooltip: l.cardioRecalculate,
                   icon: const Icon(Icons.calculate_outlined),

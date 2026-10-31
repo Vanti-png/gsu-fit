@@ -52,6 +52,16 @@ data/          SQLite uygulamaları (Sqlite…Repository), dışa/içe aktarma s
 - **Repository arayüzleri** `domain` katmanındadır. Bulut için ayrı bir uygulama (Supabase, Firebase vb.) eklenip provider'dan değiştirilebilir.
 - **Hazır veri biçimi:** JSON yedeği zaten "tablo → satırlar" biçimindedir ve senkron yükü olarak kullanılabilir. İçe aktarma birincil anahtara göre birleştirir.
 
+### Tasarım
+
+Arayüz Apple'ın macOS/iOS tasarım dilini izler; referans olarak [macos-design-skill](https://github.com/ceorkm/macos-design-skill) kullanıldı.
+
+- **Renkler:** Apple sistem renkleri. Açık ve koyu mod ayrı ayrı tasarlandı, birbirinin tersi değil (`lib/core/theme/app_theme.dart`, `AppPalette`).
+- **Yazı tipi:** SF Pro yerine ona en yakın açık lisanslı yazı tipi olan **Inter** (SIL OFL, `assets/fonts/OFL.txt`).
+- **Yüzeyler:** 0,5 px ince kenarlar, 10–14 px köşe yarıçapı, Ayarlar uygulamasındaki gibi gruplu bölümler ve renkli simge rozetleri.
+- **Kontroller:** Cupertino anahtarları ve segment kontrolleri, iOS sayfa geçişleri, dalga efekti yerine basılı tutma vurgusu.
+- **Gezinme:** Telefonda iOS sekme çubuğu. Geniş pencerede (900 px ve üstü) macOS tarzı yan menü ve klavye kısayolları: bölümler için **⌥1…⌥5** (Windows'ta Alt+1…5), Ayarlar için **⌥,**.
+
 ### Metinler ve dil
 
 - Tüm arayüz metinleri `lib/l10n/app_tr.arb` dosyasındadır. Kod yorumları ve değişken isimleri İngilizcedir.

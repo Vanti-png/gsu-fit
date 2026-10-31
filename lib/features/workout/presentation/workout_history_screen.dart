@@ -66,7 +66,7 @@ class WorkoutHistoryScreen extends ConsumerWidget {
         icon: const Icon(Icons.add),
         label: Text(l.historyAdd),
       ),
-      body: AsyncValueView<List<Workout>>(
+      body: ReadableWidth(child: AsyncValueView<List<Workout>>(
         value: workouts,
         onRetry: () => ref.invalidate(workoutsProvider),
         data: (list) {
@@ -108,7 +108,7 @@ class WorkoutHistoryScreen extends ConsumerWidget {
             itemBuilder: (context, index) => items[index].$2,
           );
         },
-      ),
+      )),
     );
   }
 }

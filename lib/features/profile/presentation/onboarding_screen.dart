@@ -97,7 +97,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     return Scaffold(
-      body: SafeArea(
+      body: ReadableWidth(maxWidth: 560, child: SafeArea(
         child: Column(
           children: [
             if (_page > 0)
@@ -133,13 +133,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          SegmentedButton<WeightUnit>(
-                            segments: [
-                              ButtonSegment(value: WeightUnit.kg, label: Text(l.unitKg)),
-                              ButtonSegment(value: WeightUnit.lb, label: Text(l.unitLb)),
-                            ],
-                            selected: {_unit},
-                            onSelectionChanged: (value) => setState(() => _unit = value.first),
+                          AppleSegmented<WeightUnit>(
+                            value: _unit,
+                            segments: {WeightUnit.kg: l.unitKg, WeightUnit.lb: l.unitLb},
+                            onChanged: (unit) => setState(() => _unit = unit),
                           ),
                           const SizedBox(height: 16),
                           BodyInfoFields(draft: _draft, unit: _unit),
@@ -200,7 +197,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ),
           ],
         ),
-      ),
+      )),
     );
   }
 }
@@ -220,7 +217,7 @@ class _WelcomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 48),
-          Icon(Icons.fitness_center, size: 96, color: theme.colorScheme.primary),
+          const Center(child: AppMark(size: 96)),
           const SizedBox(height: 24),
           Text(
             l.appTitle,

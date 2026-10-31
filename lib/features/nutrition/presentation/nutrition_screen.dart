@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gsu_fit/core/l10n/l10n.dart';
 import 'package:gsu_fit/core/l10n/labels.dart';
+import 'package:gsu_fit/core/theme/app_theme.dart';
 import 'package:gsu_fit/core/providers.dart';
 import 'package:gsu_fit/core/utils/dates.dart';
 import 'package:gsu_fit/core/utils/formatters.dart';
@@ -122,7 +123,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                 const SizedBox(height: 8),
                 ProgressBar(
                   value: targets == null || targets.waterMl == 0 ? 0 : waterTotal / targets.waterMl,
-                  color: Colors.lightBlue,
+                  color: context.palette.teal,
                 ),
                 const SizedBox(height: 12),
                 Wrap(
@@ -201,19 +202,19 @@ class _FoodSection extends ConsumerWidget {
                 label: l.foodProtein,
                 value: totals.proteinG,
                 target: goal?.proteinG,
-                color: Colors.redAccent,
+                color: context.palette.pink,
               ),
               _MacroRow(
                 label: l.foodCarbs,
                 value: totals.carbsG,
                 target: goal?.carbsG,
-                color: Colors.amber,
+                color: context.palette.orange,
               ),
               _MacroRow(
                 label: l.foodFat,
                 value: totals.fatG,
                 target: goal?.fatG,
-                color: Colors.purpleAccent,
+                color: context.palette.purple,
               ),
               if (goal != null) ...[
                 const SizedBox(height: 8),
