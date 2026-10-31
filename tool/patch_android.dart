@@ -52,11 +52,22 @@ const _webLoader = '''
     @media (prefers-color-scheme: dark) { #loading { background: #1c1c1e; color: #98989d; }
       #loading .spinner { border-color: rgba(255,255,255,0.12); border-top-color: #0a84ff; } }
     body:has(flutter-view) #loading { display: none; }
+    #loading .hint { max-width: 300px; padding: 0 24px; text-align: center; line-height: 1.45;
+      opacity: 0; transition: opacity .4s ease; }
+    #loading.slow .hint { opacity: 1; }
   </style>
-  <div id="loading" role="status">
+  <div id="loading" role="status" aria-live="polite">
     <div class="spinner"></div>
     <div>GSU Fit yükleniyor…</div>
-  </div>''';
+    <div class="hint">Bağlantı yavaş görünüyor. İlk açılış bir iki dakika sürebilir;
+      dosyalar tarayıcıda saklandığı için sonraki açılışlar çok daha hızlı olur.</div>
+  </div>
+  <script>
+    setTimeout(function () {
+      var loading = document.getElementById('loading');
+      if (loading) loading.className = 'slow';
+    }, 6000);
+  </script>''';
 
 void main() {
   final android = File('android/app/build.gradle.kts');

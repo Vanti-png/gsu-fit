@@ -39,6 +39,9 @@ flutter:
   generate: true
   # Inter (SIL OFL, see assets/fonts/OFL.txt): the closest open font to
   # Apple's SF Pro, which may not be shipped outside Apple platforms.
+  # Subset to Latin + Turkish (~60 KB per weight instead of ~325 KB) so the
+  # web version starts faster on slow connections; other scripts fall back
+  # to the platform font.
   fonts:
     - family: Inter
       fonts:
